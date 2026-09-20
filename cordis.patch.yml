@@ -5,7 +5,7 @@
 # its approval-gated, backup-first, append-only CRUD actions.
 - insert:
     - id: mcp-panel
-      name: dsh-mcp-panel
+      name: '@x1a0f3n9/dsh-mcp-panel'
       config:
         # One-shot Streamable HTTP connectivity probe tool (background job;
         # results are panel-only). Set false to omit the mcp_probe tool.

@@ -12,7 +12,7 @@ import type { Agent } from '@deepseek-ai/dsh-agent'
 import CommandRuntime from '@deepseek-ai/dsh-commands'
 import SessionStore, { SessionId, type Session } from '@deepseek-ai/dsh-session'
 import ToolRuntime from '@deepseek-ai/dsh-tools'
-import type { McpLoaderRow } from '../src/aggregate.ts'
+import { MCP_CLIENT_MODULE, type McpLoaderRow } from '../src/aggregate.ts'
 import type { McpPanelService } from '../src/service.ts'
 
 /** Fake loader entry: the stable Entry face the service reads. */
@@ -29,12 +29,12 @@ export interface FakeEntry {
 }
 
 /** Build one fake mcp-client loader row. */
-export function mcpRow(entryId: string, config: unknown, state = 2, disabled = false): FakeEntry {
+export function mcpRow(entryId: string, config: unknown, state = 2, disabled = false, name = MCP_CLIENT_MODULE): FakeEntry {
   return {
     id: entryId,
     disabled,
     fiber: state === -1 ? undefined : { state },
-    options: { id: entryId, name: '@deepseek-ai/dsh-mcp-client', config },
+    options: { id: entryId, name, config },
   }
 }
 
@@ -44,7 +44,7 @@ export function nestedMcpRow(groupId: string, entryId: string, config: unknown, 
     id: `${groupId}:${entryId}`,
     disabled,
     fiber: state === -1 ? undefined : { state },
-    options: { id: entryId, name: '@deepseek-ai/dsh-mcp-client', config },
+    options: { id: entryId, name: MCP_CLIENT_MODULE, config },
   }
 }
 

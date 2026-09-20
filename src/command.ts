@@ -21,6 +21,7 @@
  */
 
 import type { CommandDefinition } from '@deepseek-ai/dsh-commands'
+import { MCP_CLIENT_MODULE } from './client-module.ts'
 import type { McpPanelService } from './service.ts'
 import type { McpPanelSnapshot, McpServerView } from './wire.ts'
 
@@ -381,7 +382,7 @@ export function renderPatchSuggestion(
   const disabled = action === 'disable'
   const patch = [
     `- id: ${view.entryId}`,
-    `  name: '@deepseek-ai/dsh-mcp-client'`,
+    `  name: '${MCP_CLIENT_MODULE}'`,
     `  disabled: ${disabled}`,
   ].join('\n')
   const lines = [

@@ -206,6 +206,15 @@ describe('config bounds', () => {
 })
 
 describe('console actions', () => {
+  it('lists xfdsh and official mcp-client loader names', async () => {
+    const harness = await mountHarness([
+      mcpRow('mcp-xfdsh', STDIO_CONFIG),
+      mcpRow('mcp-official', HTTP_CONFIG, 2, false, '@deepseek-ai/dsh-mcp-client'),
+    ])
+    const names = harness.service.status().servers.map(server => server.serverName)
+    expect(names).toEqual(expect.arrayContaining(['cli', 'web']))
+  })
+
   it('previewPatch renders a fragment without touching any file', async () => {
     const harness = await mountHarness([mcpRow('mcp-github', STDIO_CONFIG)])
     const preview = harness.service.previewPatch(JSON.stringify({
@@ -214,7 +223,7 @@ describe('console actions', () => {
     }))
     expect(preview.ops).toBe(1)
     expect(preview.fragment).toContain('- insert:')
-    expect(preview.fragment).toContain("name: '@deepseek-ai/dsh-mcp-client'")
+    expect(preview.fragment).toContain("name: '@x1a0f3n9/dsh-mcp-client'")
   })
 
   it('rejects invalid operations before anything is written', async () => {

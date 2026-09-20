@@ -120,7 +120,7 @@ describe('/mcp command', () => {
     const harness = await mountHarness([mcpRow('mcp-github', GITHUB_CONFIG)])
     const output = text(await runCommand(harness, '/mcp github disable'))
     expect(output).toContain('- id: mcp-github')
-    expect(output).toContain("name: '@deepseek-ai/dsh-mcp-client'")
+    expect(output).toContain("name: '@x1a0f3n9/dsh-mcp-client'")
     expect(output).toContain('disabled: true')
     expect(output).not.toContain('- set:')
     expect(output).toContain('has no runtime toggle')

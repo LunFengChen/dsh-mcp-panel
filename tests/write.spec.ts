@@ -11,7 +11,7 @@ import { tmpdir } from 'node:os'
 import { afterEach, describe, expect, it } from 'vitest'
 import { appendPatchFragment } from '../src/write.ts'
 
-const FRAGMENT = "- insert:\n    - id: mcp-x\n      name: '@deepseek-ai/dsh-mcp-client'\n      config:\n        serverName: x\n        transport: stdio\n        command: npx\n"
+const FRAGMENT = "- insert:\n    - id: mcp-x\n      name: '@x1a0f3n9/dsh-mcp-client'\n      config:\n        serverName: x\n        transport: stdio\n        command: npx\n"
 
 const dirs: string[] = []
 async function tempDir(): Promise<string> {

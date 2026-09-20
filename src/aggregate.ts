@@ -28,6 +28,8 @@ import type {
   McpTransport,
 } from './wire.ts'
 
+export { MCP_CLIENT_MODULE, MCP_CLIENT_MODULE_ALIASES, isMcpClientModule } from './client-module.ts'
+
 /** One loader-derived mcp-client row (config is raw serialized data). */
 export interface McpLoaderRow {
   /** Loader entry id (the patch row id). */
@@ -39,9 +41,6 @@ export interface McpLoaderRow {
   /** Raw `config` from the entry options; may be anything. */
   config: unknown
 }
-
-/** The exact module name of the official MCP client bridge. */
-export const MCP_CLIENT_MODULE = '@deepseek-ai/dsh-mcp-client'
 
 /** Marker shown for a `!!js` config value, which the panel never evaluates. */
 export const JS_EXPRESSION_MARKER = '<expression>'

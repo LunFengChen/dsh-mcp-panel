@@ -26,9 +26,9 @@
 
 import { z } from 'zod'
 import type { McpServerConfigView } from './wire.ts'
+import { MCP_CLIENT_MODULE } from './client-module.ts'
 
-/** The official bridge module every generated row names. */
-export const MCP_CLIENT_MODULE = '@deepseek-ai/dsh-mcp-client'
+export { MCP_CLIENT_MODULE } from './client-module.ts'
 
 /** The official client's `serverName` contract: `[A-Za-z0-9_-]{1,32}`. */
 const SERVER_NAME_PATTERN = /^[A-Za-z0-9_-]{1,32}$/u

@@ -39,10 +39,10 @@ import type {} from './probe.ts'
 import {
   aggregateSnapshot,
   configViewOf,
-  MCP_CLIENT_MODULE,
   serverNameOf,
   type McpLoaderRow,
 } from './aggregate.ts'
+import { isMcpClientModule } from './client-module.ts'
 import { groupMcpTools } from './grouping.ts'
 import {
   renderPatchFragment,
@@ -287,7 +287,7 @@ private readonly trialCaller = createTrialCaller()
   status(): McpPanelSnapshot {
     const rows: McpLoaderRow[] = []
     for (const entry of this.ctx.loader.entries()) {
-      if (entry.options.name !== MCP_CLIENT_MODULE) continue
+      if (!isMcpClientModule(entry.options.name)) continue
       rows.push({
         // options.id is the user-written patch id (entry.id prefixes enclosing
         // group ids such as `include:`), so patch suggestions match on reload.
@@ -504,7 +504,7 @@ private readonly trialCaller = createTrialCaller()
   exportConfigs(): string {
     const servers: Array<{ entryId: string; config: unknown }> = []
     for (const entry of this.ctx.loader.entries()) {
-      if (entry.options.name !== MCP_CLIENT_MODULE) continue
+      if (!isMcpClientModule(entry.options.name)) continue
       servers.push({ entryId: entry.options.id, config: entry.options.config })
     }
     return exportMcpConfigs(servers)
@@ -538,7 +538,7 @@ private readonly trialCaller = createTrialCaller()
     const viewFor = new Map<string, ReturnType<typeof configViewOf>>()
     const existingIds = new Set<string>()
     for (const entry of this.ctx.loader.entries()) {
-      if (entry.options.name !== MCP_CLIENT_MODULE) continue
+      if (!isMcpClientModule(entry.options.name)) continue
       const entryId = entry.options.id
       rawFor.set(entryId, entry.options.config)
       viewFor.set(entryId, configViewOf(entry.options.config, `entry:${entryId}`))
@@ -555,7 +555,7 @@ private readonly trialCaller = createTrialCaller()
   /** The loader row for one entry id, or undefined when absent or foreign. */
   private entryOf(entryId: string): { disabled: boolean; config: unknown } | undefined {
     for (const entry of this.ctx.loader.entries()) {
-      if (entry.options.id !== entryId || entry.options.name !== MCP_CLIENT_MODULE) continue
+      if (entry.options.id !== entryId || !isMcpClientModule(entry.options.name)) continue
       return { disabled: entry.disabled, config: entry.options.config }
     }
     return undefined
@@ -611,7 +611,7 @@ private readonly trialCaller = createTrialCaller()
     this.passiveRunning = true
     try {
       for (const entry of this.ctx.loader.entries()) {
-        if (entry.options.name !== MCP_CLIENT_MODULE) continue
+        if (!isMcpClientModule(entry.options.name)) continue
         const serverName = serverNameOf(entry.options.config, `entry:${entry.options.id}`)
         const target = this.probeSpec(serverName)
         if (target === undefined) continue
@@ -637,7 +637,7 @@ private readonly trialCaller = createTrialCaller()
    */
   probeSpec(serverName: string): ProbeTarget | undefined {
     for (const entry of this.ctx.loader.entries()) {
-      if (entry.options.name !== MCP_CLIENT_MODULE) continue
+      if (!isMcpClientModule(entry.options.name)) continue
       const config = entry.options.config
       // `entry.options.id` — not `entry.id` — keeps the namespace fallback
       // identical to the snapshot's (`entry:<options.id>`); `entry.id` carries

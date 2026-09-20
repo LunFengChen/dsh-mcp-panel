@@ -1,14 +1,14 @@
 {
-  "name": "dsh-mcp-panel",
-  "version": "0.6.16",
+  "name": "@x1a0f3n9/dsh-mcp-panel",
+  "version": "0.6.16-xfdsh.1",
   "description": "MCP management console for the official DeepSeek Harness MCP client: /mcp command with health diagnostics and pipeline trial calls, a Settings MCP tab with server CRUD (append-only profile-patch fragments, approval-gated writes with automatic backups), a tool trial console over the official tool pipeline, connection status, reconnect counts and sanitized tool inventory, plus an optional Streamable HTTP probe.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PerryLink/dsh-mcp-panel.git"
+    "url": "git+https://github.com/LunFengChen/dsh-mcp-panel.git"
   },
-  "homepage": "https://github.com/PerryLink/dsh-mcp-panel#readme",
+  "homepage": "https://github.com/LunFengChen/dsh-mcp-panel#readme",
   "bugs": {
-    "url": "https://github.com/PerryLink/dsh-mcp-panel/issues"
+    "url": "https://github.com/LunFengChen/dsh-mcp-panel/issues"
   },
   "author": "PerryLink",
   "private": false,
@@ -193,6 +193,10 @@
     "prepare": "node scripts/prepare.mjs",
     "verify:self-contained": "node scripts/verify-self-contained.mjs",
     "verify:artifacts": "node scripts/verify-artifacts.mjs"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "license": "Apache-2.0",
   "funding": {
