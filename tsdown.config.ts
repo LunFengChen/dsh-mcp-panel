@@ -14,10 +14,11 @@
  * face, where tsdown externalizes declared deps/peers by default.
  */
 
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { defineConfig } from 'tsdown'
 
-/** Plugin id: the cordis.yml bare row name, the graph row id, and the stamped bundle id must all match. */
-const PLUGIN_ID = 'dsh-mcp-panel'
+const PLUGIN_ID = (JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf8')) as { name: string }).name
 
 /**
  * Module specifiers the shell shares into the frozen browser module table

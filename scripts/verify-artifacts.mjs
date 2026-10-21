@@ -8,6 +8,7 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
+const pkg = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8'))
 
 const required = ['lib/index.js', 'lib/typert.host.js', 'lib/client.js', 'lib/types/index.d.ts']
 for (const rel of required) {
@@ -25,7 +26,7 @@ if (typeof index.apply !== 'function' || index.name !== 'mcp-panel') {
   throw new Error('lib/index.js exports an unexpected plugin face')
 }
 const typert = await import(pathToFileURL(path.join(root, 'lib/typert.host.js')).href)
-if (typert.TYPERT?.package !== 'dsh-mcp-panel') {
+if (typert.TYPERT?.package !== pkg.name) {
   throw new Error('lib/typert.host.js exports an unexpected TYPERT manifest')
 }
 
@@ -34,7 +35,7 @@ const client = readFileSync(path.join(root, 'lib/client.js'), 'utf8')
 if (!client.includes('window.__ModuleLoader__.load({')) {
   throw new Error('lib/client.js is missing the ModuleLoader handshake')
 }
-if (!/id:\s*"dsh-mcp-panel"/.test(client)) {
+if (!new RegExp(`id:\\s*${JSON.stringify(pkg.name)}`).test(client)) {
   throw new Error('lib/client.js stamps the wrong bundle id')
 }
 

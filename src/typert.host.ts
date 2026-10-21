@@ -13,7 +13,7 @@ import { MCP_PANEL_INVOCATIONS } from './wire.ts'
 
 /** Host Typert manifest (validated by `@deepseek-ai/dsh-typert-loader`). */
 export const TYPERT = Object.freeze({
-  package: 'dsh-mcp-panel',
+  package: '@x1a0f3n9/dsh-mcp-panel',
   face: 'host',
   schemas: Object.freeze([]),
   invocations: MCP_PANEL_INVOCATIONS,

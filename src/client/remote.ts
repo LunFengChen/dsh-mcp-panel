@@ -45,6 +45,6 @@ declare module '@deepseek-ai/dsh-typert-protocol' {
 
 /** The client Remote contribution for the `mcpPanel` namespace. */
 export const MCP_PANEL_REMOTE = Object.freeze({
-  package: 'dsh-mcp-panel',
+  package: '@x1a0f3n9/dsh-mcp-panel',
   descriptors: MCP_PANEL_INVOCATIONS,
 } satisfies TypertRemoteContribution)
