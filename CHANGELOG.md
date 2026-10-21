@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.6.17] - 2026-10-21
+
+### Fixed
+
+- **xfdsh profile install no longer looks up a missing `@x1a0f3n9/dsh-subprocess@0.1.6-alpha.1`.** `dsh-subprocess` moved from `dependencies` to `peerDependencies` with the same range as the other DSH host peers, so the profile remap can use the runtime copy instead of a pin that was never published on the fork.
+- **xfdsh `0.1.7-rc.4` typert-loader no longer rejects the host `./typert` face.** `TYPERT.package` and the client Remote contribution now use `@x1a0f3n9/dsh-mcp-panel`, matching the published package name the loader checks.
+- **xfdsh client-modules no longer fails with duplicate factory `dsh-mcp-panel`.** The client bundle now stamps `window.__ModuleLoader__.load` with the published package name, matching the boot graph row id.
+
+### Changed
+
+- Publish as `0.6.17` without an `-xfdsh` npm prerelease tail.
+
 ## [0.6.16] - 2026-09-18
 
 ### Fixed
